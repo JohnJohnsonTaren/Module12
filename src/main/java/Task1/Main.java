@@ -21,19 +21,22 @@ public class Main {
 class RunnerTime implements Runnable {
     @Override
     public void run() {
-        for (int i = 1; i <= 20; i++) {
-            if (i % 5 != 0) {
-                if (i == 1) {
-                    System.out.println(i + " second have passed since the program started");
-                } else {
-                    System.out.println(i + " seconds have passed since the program started");
-                }
+        long sec = System.currentTimeMillis();
+        while (true) {
+            long currentSec = System.currentTimeMillis();
+            long elapsedSec = (currentSec - sec) / 1000;
+
+            if (elapsedSec > 0) {
+                System.out.println(elapsedSec + " seconds have passed since the program started");
+            } else if (elapsedSec == 1) {
+                System.out.println(elapsedSec + " second have passed since the program started");
             }
 
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                break;
             }
         }
     }
@@ -42,26 +45,24 @@ class RunnerTime implements Runnable {
 class Passed implements Runnable {
     @Override
     public void run() {
-        for (int i = 1; i <= 20; i++) {
-            if (i % 5 == 0) {
-                System.out.println(i + " seconds have passed");
+        long elapsedSec = 0;
+        long sec = System.currentTimeMillis();
+
+        while (true) {
+            long currentSec = System.currentTimeMillis();
+            elapsedSec = (currentSec - sec) / 1000;
+
+            if (elapsedSec % 5 == 0 && elapsedSec > 0) {
+                System.out.println(elapsedSec + " seconds have passed");
             }
 
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                break;
             }
         }
     }
 }
 
-//class Task1.Passed extends  Thread {
-//    @Override
-//    public void run() {
-//        for (int i = 0; i < ; i++) {
-//
-//        }
-//    }
-//
-//}

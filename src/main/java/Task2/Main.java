@@ -8,13 +8,13 @@ public class Main {
     public static void main(String[] args) {
         BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
-        Thread a = new Thread(new Number.Fizz(queue));
+        Thread a = new Thread(new Fizz(queue));
         a.start();
 
-        Thread b = new Thread(new Number.Buzz(queue));
+        Thread b = new Thread(new Buzz(queue));
         b.start();
 
-        Thread c = new Thread(new Number.FizzBuzz(queue));
+        Thread c = new Thread(new FizzBuzz(queue));
         c.start();
 
         Thread d = new Thread(new Number(queue));
@@ -29,7 +29,7 @@ public class Main {
         }
 
         @Override
-        public synchronized void run() {
+        public void run() {
             for (int i = 1; i <= 15; i++) {
                 if (i % 3 != 0 && i % 5 != 0) {
                     System.out.println(i);
@@ -42,72 +42,72 @@ public class Main {
                 }
             }
         }
+    }
 
-        static class Fizz implements Runnable {
-            private final BlockingQueue<String> queue;
+    static class Fizz implements Runnable {
+        private final BlockingQueue<String> queue;
 
-            public Fizz(BlockingQueue<String> queue) {
-                this.queue = queue;
-            }
+        public Fizz(BlockingQueue<String> queue) {
+            this.queue = queue;
+        }
 
-            @Override
-            public synchronized void run() {
-                for (int i = 1; i <= 15; i++) {
-                    if (i % 3 == 0 && i % 5 != 0) {
-                        queue.add(i + " Fizz");
-                    }
+        @Override
+        public void run() {
+            for (int i = 1; i <= 15; i++) {
+                if (i % 3 == 0 && i % 5 != 0) {
+                    queue.add(i + " Fizz");
+                }
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
+    }
 
-        static class Buzz implements Runnable {
-            private final BlockingQueue<String> queue;
+    static class Buzz implements Runnable {
+        private final BlockingQueue<String> queue;
 
-            public Buzz(BlockingQueue<String> queue) {
-                this.queue = queue;
-            }
+        public Buzz(BlockingQueue<String> queue) {
+            this.queue = queue;
+        }
 
-            @Override
-            public synchronized void run() {
-                for (int i = 1; i <= 15; i++) {
-                    if (i % 5 == 0 && i % 3 != 0) {
-                        queue.add(i + " Buzz");
-                    }
+        @Override
+        public void run() {
+            for (int i = 1; i <= 15; i++) {
+                if (i % 5 == 0 && i % 3 != 0) {
+                    queue.add(i + " Buzz");
+                }
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
+    }
 
-        static class FizzBuzz implements Runnable {
-            private final BlockingQueue<String> queue;
+    static class FizzBuzz implements Runnable {
+        private final BlockingQueue<String> queue;
 
-            public FizzBuzz(BlockingQueue<String> queue) {
-                this.queue = queue;
-            }
+        public FizzBuzz(BlockingQueue<String> queue) {
+            this.queue = queue;
+        }
 
-            @Override
-            public synchronized void run() {
-                for (int i = 1; i <= 15; i++) {
-                    if (i % 3 == 0 && i % 5 == 0) {
-                        queue.add(i + " FizzBuzz");
-                    }
+        @Override
+        public void run() {
+            for (int i = 1; i <= 15; i++) {
+                if (i % 3 == 0 && i % 5 == 0) {
+                    queue.add(i + " FizzBuzz");
+                }
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
