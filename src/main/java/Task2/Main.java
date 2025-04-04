@@ -45,6 +45,11 @@ public class Main {
                             return;
                         }
                     }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     if (current > n) {
                         lock.notifyAll();
                         break;
@@ -69,6 +74,11 @@ public class Main {
                             Thread.currentThread().interrupt();
                             return;
                         }
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                     if (current > n) {
                         lock.notifyAll();
@@ -100,6 +110,11 @@ public class Main {
                             Thread.currentThread().interrupt();
                             return;
                         }
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                     if (current > n) {
                         lock.notifyAll();
